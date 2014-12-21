@@ -43,7 +43,7 @@ Options are not mantatory:
   - example: `{ name1: char1, name2: char2, ... }`
 - __enabled__ (Array) - disable all emojies except whitelisted
 - __shortcuts__ (Object) - rewrite default shortcuts
-  - emample: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
+  - example: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
 
 Differences in browser. If you load script directly into the page, without
 package system, module will add itself globally with name `markdownitEmoji`.
