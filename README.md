@@ -7,6 +7,14 @@
 > Emoji syntax plugin for [markdown-it](https://github.com/markdown-it/markdown-it)
 markdown parser.
 
+Two versions:
+
+- __Full__ (default), with all github supported emojies.
+- [Light](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/light.json), with only well supported unicode emojies and reduced size.
+
+Also supports [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.json) like `:)`, `:-(`, ...
+
+
 ## Install
 
 node.js, browser:
@@ -23,15 +31,17 @@ bower install markdown-it-emoji --save
 ```js
 var md = require('markdown-it')();
 var emoji = require('markdown-it-emoji');
+// Or for light version
+// var emoji = require('markdown-it-emoji/light');
 
 md.use(emoji [, options]);
 ```
 
 Options are not mantatory:
 
-- __defs__ (Object) - rewrite available emojies
+- __defs__ (Object) - rewrite available emojies definitions
   - example: `{ name1: char1, name2: char2, ... }`
-- __enabled__ (Array) - whitelist available emoji names from default list
+- __enabled__ (Array) - disable all emojies except whitelisted
 - __shortcuts__ (Object) - rewrite default shortcuts
   - emample: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
 
@@ -69,7 +79,7 @@ Or use [twemoji](https://github.com/twitter/twemoji):
 var twemoji = require('twemoji')
 
 md.renderer.emoji = function(token, idx) {
-  return twemoji.parse(token[idx].char);
+  return twemoji.parse(token[idx].to);
 }
 ```
 
