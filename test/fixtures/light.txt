@@ -1,0 +1,10 @@
+---
+desc: Light version
+---
+
+should fail on stripped emoji names
+.
+:100:
+.
+<p>:100:</p>
+.

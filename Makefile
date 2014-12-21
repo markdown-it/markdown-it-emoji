@@ -25,12 +25,20 @@ browserify:
 	mkdir dist
 	# Browserify
 	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
-		./node_modules/.bin/browserify -r ./ -s markdownitEmoji \
+		./node_modules/.bin/browserify ./ -s markdownitEmoji \
 		) > dist/markdown-it-emoji.js
 	# Minify
 	./node_modules/.bin/uglifyjs dist/markdown-it-emoji.js -b beautify=false,ascii-only=true -c -m \
 		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
 		> dist/markdown-it-emoji.min.js
+	# Browserify light version
+	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
+		./node_modules/.bin/browserify ./light.js -s markdownitEmoji \
+		) > dist/markdown-it-emoji-light.js
+	# Minify light version
+	./node_modules/.bin/uglifyjs dist/markdown-it-emoji-light.js -b beautify=false,ascii-only=true -c -m \
+		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
+		> dist/markdown-it-emoji-light.min.js
 
 .PHONY: lint test  coverage
 .SILENT: lint test

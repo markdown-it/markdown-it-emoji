@@ -1,0 +1,10 @@
+---
+desc: Full version
+---
+
+should support full set of emoji names
+.
+:100:
+.
+<p>💯</p>
+.
