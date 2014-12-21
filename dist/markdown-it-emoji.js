@@ -1331,7 +1331,7 @@ module.exports = function emoji_replace(state, emojies, shortcuts, compiledRE) {
   }
 };
 
-},{}],"/":[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 
@@ -1358,5 +1358,5 @@ module.exports = function emoji_plugin(md, options) {
   });
 };
 
-},{"./lib/data/full.json":1,"./lib/data/shortcuts.json":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[])("/")
+},{"./lib/data/full.json":1,"./lib/data/shortcuts.json":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[6])(6)
 });
