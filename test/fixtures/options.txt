@@ -1,0 +1,24 @@
+---
+desc: Rewrite emojis & shortcuts
+---
+
+emojis
+.
+:one: aaa :fifty:
+.
+<p>!!!one!!! aaa !!50!!</p>
+.
+
+shortcuts
+.
+:50 |50 :uno aaa
+.
+<p>!!50!! !!50!! !!!one!!! aaa</p>
+.
+
+skip rewritten defaults
+.
+:smile: :)
+.
+<p>:smile: :)</p>
+.

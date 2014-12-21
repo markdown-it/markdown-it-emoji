@@ -1,0 +1,35 @@
+---
+desc: Direct names
+---
+
+
+Start of string
+.
+:smile: test __1__
+.
+<p>😀 test <strong>1</strong></p>
+.
+
+
+End of string
+.
+test __2__ :happy:
+.
+<p>test <strong>2</strong> 😆</p>
+.
+
+
+Middle & multiple
+.
+aaa :joy: bbb :proud: ccc :kissing_heart: ddd
+.
+<p>aaa 😂 bbb 😊 ccc 😘 ddd</p>
+.
+
+
+Unknown name
+.
+:joy: :qwerty:
+.
+<p>😂 :qwerty:</p>
+.

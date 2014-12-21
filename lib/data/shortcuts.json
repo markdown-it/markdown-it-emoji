@@ -1,0 +1,11 @@
+{
+  "smile": [ ":)", ":-)" ],
+  "disappointed": [ ":(", ":-(" ],
+  "laughing": [ ":D", ":-D" ],
+  "sunglasses": [ "8-)", "B-)" ],
+  "wink": [ ";)", ";-)" ],
+  "astonished": [ ":o", ":-o", ":O", ":-O" ],
+  "cry": [ ";(", ";-(" ],
+  "expressionless": [ ":|", ":-|" ],
+  "kissing": [ ":*", ":-*" ]
+}
