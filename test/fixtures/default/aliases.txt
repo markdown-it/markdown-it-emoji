@@ -2,13 +2,14 @@
 desc: Aliases
 ---
 
-
+alias + original
 .
 :) :smile:
 .
 <p>😀 😀</p>
 .
 
+2 differend aliases
 .
 :D :-D
 .

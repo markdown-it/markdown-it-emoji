@@ -16,9 +16,9 @@ describe('markdown-it-emoji', function () {
 
 
   md = markdownit().use(emoji);
-  generate(path.join(__dirname, 'fixtures/default'), md);
+  generate(path.join(__dirname, 'fixtures/default'), { header: true }, md);
 
-  generate(path.join(__dirname, 'fixtures/full.txt'), md);
+  generate(path.join(__dirname, 'fixtures/full.txt'), { header: true }, md);
 
 
   md = markdownit().use(emoji, {
@@ -31,11 +31,11 @@ describe('markdown-it-emoji', function () {
       one: ':uno'
     }
   });
-  generate(path.join(__dirname, 'fixtures/options.txt'), md);
+  generate(path.join(__dirname, 'fixtures/options.txt'), { header: true }, md);
 
 
   md = markdownit().use(emoji, { enabled: [ 'smile', 'haha' ] });
-  generate(path.join(__dirname, 'fixtures/whitelist.txt'), md);
+  generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
 });
 
 
@@ -43,9 +43,9 @@ describe('markdown-it-emoji-light', function () {
   var md;
 
   md = markdownit().use(emoji_light);
-  generate(path.join(__dirname, 'fixtures/default'), md);
+  generate(path.join(__dirname, 'fixtures/default'), { header: true }, md);
 
-  generate(path.join(__dirname, 'fixtures/light.txt'), md);
+  generate(path.join(__dirname, 'fixtures/light.txt'), { header: true }, md);
 
   md = markdownit().use(emoji_light, {
     defs: {
@@ -57,9 +57,9 @@ describe('markdown-it-emoji-light', function () {
       one: ':uno'
     }
   });
-  generate(path.join(__dirname, 'fixtures/options.txt'), md);
+  generate(path.join(__dirname, 'fixtures/options.txt'), { header: true }, md);
 
 
   md = markdownit().use(emoji_light, { enabled: [ 'smile', 'haha' ] });
-  generate(path.join(__dirname, 'fixtures/whitelist.txt'), md);
+  generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
 });

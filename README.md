@@ -12,7 +12,7 @@ Two versions:
 - __Full__ (default), with all github supported emojies.
 - [Light](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/light.json), with only well supported unicode emojies and reduced size.
 
-Also supports [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.json) like `:)`, `:-(`, ...
+Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.json) like `:)`, `:-(`, ...
 
 
 ## Install
@@ -45,9 +45,9 @@ Options are not mantatory:
 - __shortcuts__ (Object) - rewrite default shortcuts
   - example: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
 
-Differences in browser. If you load script directly into the page, without
+_Differences in browser._ If you load script directly into the page, without
 package system, module will add itself globally with name `markdownitEmoji`.
-Then, init will look a bit different:
+Then init will look a bit different:
 
 ```js
 var md = window.markdownit().use(window.markdownitEmoji);
