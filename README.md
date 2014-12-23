@@ -65,9 +65,9 @@ Render as span blocks (for example, to use custom iconic font):
 // ...
 // initialize
 
-md.renderer.emoji = function(token, idx) {
+md.renderer.rules.emoji = function(token, idx) {
   return '<span class="emoji emoji_' + token[idx].name + '></span>';
-}
+};
 ```
 
 Or use [twemoji](https://github.com/twitter/twemoji):
@@ -78,11 +78,22 @@ Or use [twemoji](https://github.com/twitter/twemoji):
 
 var twemoji = require('twemoji')
 
-md.renderer.emoji = function(token, idx) {
+md.renderer.rules.emoji = function(token, idx) {
   return twemoji.parse(token[idx].to);
-}
+};
 ```
 
+__NB 1__. Read [twemoji docs](https://github.com/twitter/twemoji#string-parsing)!
+May be you need more options to change image size & type.
+
+__NB 2__. For twemoji you can like to fit image height to line height with this
+style:
+
+```css
+.emoji {
+  height: 1.2em;
+}
+```
 
 ## License
 
