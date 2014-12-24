@@ -1,12 +1,15 @@
 {
   "name": "markdown-it-emoji",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Emoji plugin for markdown-it markdown parser.",
   "keywords": [
     "markdown-it-plugin",
     "markdown-it",
     "markdown",
-    "emoji"
+    "emoji",
+    "emojies",
+    "emoticon",
+    "emoticons"
   ],
   "homepage": "https://github.com/markdown-it/markdown-it-emoji",
   "repository": {

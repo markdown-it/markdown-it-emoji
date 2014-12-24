@@ -2,12 +2,15 @@
   "name": "markdown-it-emoji",
   "main": "dist/markdown-it-emoji.js",
   "homepage": "https://github.com/markdown-it/markdown-it-emoji",
-  "description": "Emoji plugin for markdown-it markdown parser.",
+  "description": "Emoji and emoticon plugin for markdown-it markdown parser.",
   "keywords": [
     "markdown-it-plugin",
     "markdown-it",
     "markdown",
-    "emoji"
+    "emoji",
+    "emojies",
+    "emoticon",
+    "emoticons"
   ],
   "license": "MIT",
   "ignore": [
