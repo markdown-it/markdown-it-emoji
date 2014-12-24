@@ -4,14 +4,14 @@ desc: Aliases
 
 alias + original
 .
-:) :smile:
+:) :smiley:
 .
-<p>😀 😀</p>
+<p>😃 😃</p>
 .
 
 2 differend aliases
 .
 :D :-D
 .
-<p>😆 😆</p>
+<p>😀 😀</p>
 .

@@ -4,15 +4,14 @@
 [![NPM version](https://img.shields.io/npm/v/markdown-it-emoji.svg?style=flat)](https://www.npmjs.org/package/markdown-it-emoji)
 [![Coverage Status](https://img.shields.io/coveralls/markdown-it/markdown-it-emoji/master.svg?style=flat)](https://coveralls.io/r/markdown-it/markdown-it-emoji?branch=dev)
 
-> Emoji syntax plugin for [markdown-it](https://github.com/markdown-it/markdown-it)
-markdown parser.
+> Plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser, adding emoji & emoticon syntax support.
 
 Two versions:
 
 - __Full__ (default), with all github supported emojies.
 - [Light](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/light.json), with only well supported unicode emojies and reduced size.
 
-Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.json) like `:)`, `:-(`, ...
+Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.js) like `:)`, `:-(`, and other. See full list an link above.
 
 
 ## Install

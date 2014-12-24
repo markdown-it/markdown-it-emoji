@@ -2,7 +2,7 @@
 
 
 var emojies_light     = require('./lib/data/light.json');
-var emojies_shortcuts = require('./lib/data/shortcuts.json');
+var emojies_shortcuts = require('./lib/data/shortcuts');
 var emoji_html        = require('./lib/render');
 var emoji_replace     = require('./lib/replace');
 var normalize_opts    = require('./lib/normalize_opts');
