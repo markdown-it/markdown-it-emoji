@@ -1,4 +1,4 @@
-/*! markdown-it-emoji 0.1.0 https://github.com//markdown-it/markdown-it-emoji @license MIT */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.markdownitEmoji=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-emoji 0.1.2 https://github.com//markdown-it/markdown-it-emoji @license MIT */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.markdownitEmoji=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
   "smile": "😀",
   "happy": "😆",
@@ -159,17 +159,47 @@ module.exports={
   "black_large_square": "⬛"
 }
 },{}],2:[function(require,module,exports){
-module.exports={
-  "smile": [ ":)", ":-)" ],
-  "disappointed": [ ":(", ":-(" ],
-  "laughing": [ ":D", ":-D" ],
-  "sunglasses": [ "8-)", "B-)" ],
-  "wink": [ ";)", ";-)" ],
-  "astonished": [ ":o", ":-o", ":O", ":-O" ],
-  "cry": [ ";(", ";-(" ],
-  "expressionless": [ ":|", ":-|" ],
-  "kissing": [ ":*", ":-*" ]
-}
+// Emoticons -> Emoji mapping.
+//
+// (!) Some patterns skipped, to avoid collisions
+// without increase matcher complicity. Than can change in future.
+//
+// Places to look for more emoticons info:
+//
+// - http://en.wikipedia.org/wiki/List_of_emoticons#Western
+// - https://github.com/wooorm/emoticon/blob/master/Support.md
+// - http://factoryjoe.com/projects/emoticons/
+//
+'use strict';
+
+module.exports = {
+  mad:              [ '>:(', '>:-(' ], // angry
+  blush:            [ ':")', ':-")' ],
+  broken_heart:     [ '</3', '<\\3' ],
+  confused:         [ ':\\', ':-\\', ':/', ':-/' ], // twemoji shows question
+  cry:              [ ":'(", ":'-(", ':,(', ':,-(' ],
+  frowning:         [ ':(', ':-(' ],
+  heart:            [ '<3' ],
+  imp:              [ ']:(', ']:-(' ],
+  innocent:         [ 'o:)', 'O:)', 'o:-)', 'O:-)', '0:)', '0:-)' ],
+  joy:              [ ":')", ":'-)", ':,)', ':,-)', ":'D", ":'-D", ':,D', ':,-D' ],
+  kissing:          [ ':*', ':-*' ],
+  laughing:         [ 'x-)', 'X-)' ],
+  neutral_face:     [ ':|', ':-|' ],
+  open_mouth:       [ ':o', ':-o', ':O', ':-O' ],
+  rage:             [ ':@', ':-@' ],
+  smile:            [ ':D', ':-D' ],
+  smiley:           [ ':)', ':-)' ],
+  smiling_imp:      [ ']:)', ']:-)' ],
+  sob:              [ ":,'(", ":,'-(", ';(', ';-(' ],
+  stuck_out_tongue: [ ':P', ':-P' ],
+  sunglasses:       [ '8-)', 'B-)' ],
+  sweat:            [ ',:(', ',:-(' ],
+  sweat_smile:      [ ',:)', ',:-)' ],
+  unamused:         [ ':s', ':-S', ':z', ':-Z', ':$', ':-$' ],
+  wink:             [ ';)', ';-)' ]
+};
+
 },{}],3:[function(require,module,exports){
 // Convert input options to more useable format
 // and compile search regexp
@@ -238,73 +268,82 @@ module.exports = function emoji_html(tokens, idx /*, options, env */) {
 };
 
 },{}],5:[function(require,module,exports){
+// Emojies & shortcuts replacement logic.
+//
+// Note: In theory, it could be faster to parse :smile: in inline chain and
+// leave only shortcuts here. But, who care...
+//
+
 'use strict';
 
-/*eslint-disable no-loop-func*/
 
-function arrayReplaceAt(src, pos, newElements) {
-  return [].concat(src.slice(0, pos), newElements, src.slice(pos + 1));
-}
+module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
+  var arrayReplaceAt = md.utils.arrayReplaceAt;
 
-module.exports = function emoji_replace(state, emojies, shortcuts, compiledRE) {
-  var i, j, l, tokens, token, text, nodes, level, last_pos, emoji_name,
-      blockTokens = state.tokens;
+  function splitTextToken(text, level) {
+    var last_pos = 0, nodes = [];
 
-  for (j = 0, l = blockTokens.length; j < l; j++) {
-    if (blockTokens[j].type !== 'inline') { continue; }
-    tokens = blockTokens[j].children;
+    text.replace(compiledRE, function(match, offset) {
+      var emoji_name;
+      // Validate emoji name
+      if (shortcuts.hasOwnProperty(match)) {
+        // replace shortcut with full name
+        emoji_name = shortcuts[match];
+      } else {
+        emoji_name = match.slice(1, -1);
+      }
 
-    // We scan from the end, to keep position when new tags added.
-    // Use reversed logic in links start/end match
-    for (i = tokens.length - 1; i >= 0; i--) {
-      token = tokens[i];
-
-      if (token.type === 'text' && compiledRE.test(token.content)) {
-        text      = token.content;
-        last_pos  = 0;
-        nodes     = [];
-        level     = token.level;
-        compiledRE.lastIndex = 0;
-
-        token.content.replace(compiledRE, function(match, offset) {
-          // Validate emoji name
-          if (shortcuts.hasOwnProperty(match)) {
-            // replace shortcut with full name
-            emoji_name = shortcuts[match];
-          } else {
-            emoji_name = match.slice(1, -1);
-          }
-
-          // Add new tokens to pending list
-          if (offset > last_pos) {
-            nodes.push({
-              type: 'text',
-              content: text.slice(last_pos, offset),
-              level: level
-            });
-          }
-          nodes.push({
-            type: 'emoji',
-            name:  emoji_name,
-            to: emojies[emoji_name],
-            level: level
-          });
-          last_pos = offset + match.length;
-
+      // Add new tokens to pending list
+      if (offset > last_pos) {
+        nodes.push({
+          type: 'text',
+          content: text.slice(last_pos, offset),
+          level: level
         });
+      }
+      nodes.push({
+        type: 'emoji',
+        name:  emoji_name,
+        to: emojies[emoji_name],
+        level: level
+      });
+      last_pos = offset + match.length;
 
-        if (last_pos < text.length) {
-          nodes.push({
-            type: 'text',
-            content: text.slice(last_pos),
-            level: level
-          });
+    });
+
+    if (last_pos < text.length) {
+      nodes.push({
+        type: 'text',
+        content: text.slice(last_pos),
+        level: level
+      });
+    }
+
+    return nodes;
+  }
+
+  return function emoji_replace(state) {
+    var i, j, l, tokens, token,
+        blockTokens = state.tokens;
+
+    for (j = 0, l = blockTokens.length; j < l; j++) {
+      if (blockTokens[j].type !== 'inline') { continue; }
+      tokens = blockTokens[j].children;
+
+      // We scan from the end, to keep position when new tags added.
+      // Use reversed logic in links start/end match
+      for (i = tokens.length - 1; i >= 0; i--) {
+        token = tokens[i];
+
+        if (token.type === 'text' && compiledRE.test(token.content)) {
+          // replace current node
+          blockTokens[j].children = tokens = arrayReplaceAt(
+            tokens, i, splitTextToken(token.content, token.level)
+          );
         }
-        // replace current node
-        blockTokens[j].children = tokens = arrayReplaceAt(tokens, i, nodes);
       }
     }
-  }
+  };
 };
 
 },{}],6:[function(require,module,exports){
@@ -312,7 +351,7 @@ module.exports = function emoji_replace(state, emojies, shortcuts, compiledRE) {
 
 
 var emojies_light     = require('./lib/data/light.json');
-var emojies_shortcuts = require('./lib/data/shortcuts.json');
+var emojies_shortcuts = require('./lib/data/shortcuts');
 var emoji_html        = require('./lib/render');
 var emoji_replace     = require('./lib/replace');
 var normalize_opts    = require('./lib/normalize_opts');
@@ -329,10 +368,8 @@ module.exports = function emoji_plugin(md, options) {
 
   md.renderer.rules.emoji = emoji_html;
 
-  md.core.ruler.push('emoji', function emoji_rule(state) {
-    emoji_replace(state, opts.emojies, opts.shortcuts, opts.scanRE);
-  });
+  md.core.ruler.push('emoji', emoji_replace(md, opts.emojies, opts.shortcuts, opts.scanRE));
 };
 
-},{"./lib/data/light.json":1,"./lib/data/shortcuts.json":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[6])(6)
+},{"./lib/data/light.json":1,"./lib/data/shortcuts":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[6])(6)
 });
