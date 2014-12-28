@@ -15,3 +15,17 @@ alias + original
 .
 <p>😀 😀</p>
 .
+
+should not conflict with URLs
+.
+http://google.com
+.
+<p>http://google.com</p>
+.
+
+should not conflict with win paths
+.
+c:\windows
+.
+<p>c:\windows</p>
+.
