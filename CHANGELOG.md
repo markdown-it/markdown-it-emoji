@@ -1,3 +1,9 @@
+0.1.3 / 2014-12-28
+------------------
+
+- Removed conflicting shortcuts :/ & :\ until logic improved
+
+
 0.1.2 / 2014-12-24
 ------------------
 
