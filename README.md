@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/markdown-it/markdown-it-emoji/master.svg?style=flat)](https://travis-ci.org/markdown-it/markdown-it-emoji)
 [![NPM version](https://img.shields.io/npm/v/markdown-it-emoji.svg?style=flat)](https://www.npmjs.org/package/markdown-it-emoji)
-[![Coverage Status](https://img.shields.io/coveralls/markdown-it/markdown-it-emoji/master.svg?style=flat)](https://coveralls.io/r/markdown-it/markdown-it-emoji?branch=dev)
+[![Coverage Status](https://img.shields.io/coveralls/markdown-it/markdown-it-emoji/master.svg?style=flat)](https://coveralls.io/r/markdown-it/markdown-it-emoji?branch=master)
 
 > Plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser, adding emoji & emoticon syntax support.
 
