@@ -65,7 +65,7 @@ Render as span blocks (for example, to use custom iconic font):
 // initialize
 
 md.renderer.rules.emoji = function(token, idx) {
-  return '<span class="emoji emoji_' + token[idx].name + '></span>';
+  return '<span class="emoji emoji_' + token[idx].markup + '"></span>';
 };
 ```
 
@@ -78,7 +78,7 @@ Or use [twemoji](https://github.com/twitter/twemoji):
 var twemoji = require('twemoji')
 
 md.renderer.rules.emoji = function(token, idx) {
-  return twemoji.parse(token[idx].to);
+  return twemoji.parse(token[idx].content);
 };
 ```
 
