@@ -6,6 +6,8 @@
 
 > Plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser, adding emoji & emoticon syntax support.
 
+__v1.+ requires `markdown-it` v4.+, see changelog.__
+
 Two versions:
 
 - __Full__ (default), with all github supported emojies.
