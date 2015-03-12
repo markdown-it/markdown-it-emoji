@@ -1,4 +1,4 @@
-/*! markdown-it-emoji 0.1.3 https://github.com//markdown-it/markdown-it-emoji @license MIT */!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.markdownitEmoji=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-emoji 1.0.0 https://github.com//markdown-it/markdown-it-emoji @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitEmoji = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
   "100": "💯",
   "911": "🚨",
@@ -1289,7 +1289,7 @@ module.exports = function normalize_opts(options) {
 'use strict';
 
 module.exports = function emoji_html(tokens, idx /*, options, env */) {
-  return tokens[idx].to;
+  return tokens[idx].content;
 };
 
 },{}],5:[function(require,module,exports){
@@ -1305,8 +1305,8 @@ module.exports = function emoji_html(tokens, idx /*, options, env */) {
 module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
   var arrayReplaceAt = md.utils.arrayReplaceAt;
 
-  function splitTextToken(text, level) {
-    var last_pos = 0, nodes = [];
+  function splitTextToken(text, level, Token) {
+    var token, last_pos = 0, nodes = [];
 
     text.replace(compiledRE, function(match, offset) {
       var emoji_name;
@@ -1320,28 +1320,23 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
 
       // Add new tokens to pending list
       if (offset > last_pos) {
-        nodes.push({
-          type: 'text',
-          content: text.slice(last_pos, offset),
-          level: level
-        });
+        token         = new Token('text', '', 0);
+        token.content = text.slice(last_pos, offset);
+        nodes.push(token);
       }
-      nodes.push({
-        type: 'emoji',
-        name:  emoji_name,
-        to: emojies[emoji_name],
-        level: level
-      });
-      last_pos = offset + match.length;
 
+      token         = new Token('emoji', '', 0);
+      token.markup  = emoji_name;
+      token.content = emojies[emoji_name];
+      nodes.push(token);
+
+      last_pos = offset + match.length;
     });
 
     if (last_pos < text.length) {
-      nodes.push({
-        type: 'text',
-        content: text.slice(last_pos),
-        level: level
-      });
+      token         = new Token('text', '', 0);
+      token.content = text.slice(last_pos);
+      nodes.push(token);
     }
 
     return nodes;
@@ -1363,7 +1358,7 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
         if (token.type === 'text' && compiledRE.test(token.content)) {
           // replace current node
           blockTokens[j].children = tokens = arrayReplaceAt(
-            tokens, i, splitTextToken(token.content, token.level)
+            tokens, i, splitTextToken(token.content, token.level, state.Token)
           );
         }
       }
