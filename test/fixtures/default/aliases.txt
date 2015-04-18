@@ -16,6 +16,13 @@ alias + original
 <p>😀 😀</p>
 .
 
+Potentially conflicting
+.
+:/ :/. :/
+.
+<p>❓ ❓. ❓</p>
+.
+
 should not conflict with URLs
 .
 http://google.com
