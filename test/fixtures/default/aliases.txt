@@ -13,14 +13,14 @@ alias + original
 .
 :D :-D
 .
-<p>😀 😀</p>
+<p>😄 😄</p>
 .
 
 Potentially conflicting
 .
 :/ :/. :/
 .
-<p>❓ ❓. ❓</p>
+<p>😕 😕. 😕</p>
 .
 
 should not conflict with URLs

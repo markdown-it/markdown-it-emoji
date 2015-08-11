@@ -7,13 +7,13 @@ Start of string
 .
 :smile: test __1__
 .
-<p>😀 test <strong>1</strong></p>
+<p>😄 test <strong>1</strong></p>
 .
 
 
 End of string
 .
-test __2__ :happy:
+test __2__ :laughing:
 .
 <p>test <strong>2</strong> 😆</p>
 .
@@ -21,7 +21,7 @@ test __2__ :happy:
 
 Middle & multiple
 .
-aaa :joy: bbb :proud: ccc :kissing_heart: ddd
+aaa :joy: bbb :blush: ccc :kissing_heart: ddd
 .
 <p>aaa 😂 bbb 😊 ccc 😘 ddd</p>
 .

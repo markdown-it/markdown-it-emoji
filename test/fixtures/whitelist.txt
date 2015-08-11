@@ -4,7 +4,7 @@ desc: Whitelisting defaults
 
 Show only allowed emojies
 .
-:smile: :haha: :wink:
+:smile: :grin: :wink:
 .
-<p>😀 😆 :wink:</p>
+<p>😄 😁 :wink:</p>
 .

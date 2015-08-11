@@ -32,9 +32,6 @@ request(emojiSrc, function (err, response, body) {
     def.aliases.forEach(function (alias) {
       emojies[alias] = def.emoji;
     });
-    def.tags.forEach(function (tag) {
-      emojies[tag] = def.emoji;
-    });
   });
 
   fs.writeFileSync(p.join(__dirname, '../lib/data/full.json'), JSON.stringify(emojies, null, 2), 'utf8');
