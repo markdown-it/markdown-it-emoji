@@ -24,9 +24,12 @@
   "scripts": {
     "test": "make test"
   },
-  "scripts": {
-    "test": "make test"
-  },
+  "files": [
+    "index.js",
+    "light.js",
+    "lib/",
+    "dist/"
+  ],
   "devDependencies": {
     "browserify": "*",
     "coveralls": "^2.11.2",
