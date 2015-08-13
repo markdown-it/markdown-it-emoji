@@ -1,90 +1,56 @@
-/*! markdown-it-emoji 1.0.0 https://github.com//markdown-it/markdown-it-emoji @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitEmoji = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-emoji 1.1.0 https://github.com//markdown-it/markdown-it-emoji @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitEmoji = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
-  "smile": "😀",
-  "happy": "😆",
-  "joy": "😂",
+  "smile": "😄",
   "smiley": "😃",
-  "haha": "😆",
   "grinning": "😀",
-  "proud": "😊",
+  "blush": "😊",
   "wink": "😉",
-  "flirt": "😘",
   "heart_eyes": "😍",
-  "crush": "😍",
   "kissing_heart": "😘",
   "kissing_closed_eyes": "😚",
   "kissing": "😗",
   "kissing_smiling_eyes": "😙",
   "stuck_out_tongue_winking_eye": "😜",
-  "prank": "😝",
-  "silly": "😜",
   "stuck_out_tongue_closed_eyes": "😝",
   "stuck_out_tongue": "😛",
   "flushed": "😳",
   "grin": "😁",
   "pensive": "😔",
   "relieved": "😌",
-  "whew": "😌",
   "unamused": "😒",
-  "meh": "😐",
   "disappointed": "😞",
   "persevere": "😣",
-  "struggling": "😣",
-  "cry": "😭",
-  "tear": "😿",
-  "tears": "😂",
+  "cry": "😢",
+  "joy": "😂",
   "sob": "😭",
-  "bawling": "😭",
   "sleepy": "😪",
-  "tired": "😩",
   "disappointed_relieved": "😥",
-  "phew": "😥",
-  "sweat": "😓",
-  "nervous": "😟",
   "cold_sweat": "😰",
   "sweat_smile": "😅",
-  "hot": "😅",
+  "sweat": "😓",
   "weary": "😩",
   "tired_face": "😫",
-  "upset": "😫",
-  "whine": "😫",
   "fearful": "😨",
-  "scared": "😨",
-  "shocked": "😱",
-  "oops": "😨",
   "scream": "😱",
-  "horror": "🙀",
-  "mad": "😠",
-  "annoyed": "😠",
+  "angry": "😠",
   "rage": "😡",
-  "smug": "😏",
   "confounded": "😖",
   "laughing": "😆",
   "satisfied": "😆",
   "yum": "😋",
-  "lick": "😋",
   "mask": "😷",
-  "sick": "😷",
-  "ill": "😷",
   "sunglasses": "😎",
+  "sleeping": "😴",
   "dizzy_face": "😵",
   "astonished": "😲",
-  "amazed": "😲",
-  "gasp": "😲",
   "worried": "😟",
   "frowning": "😦",
   "anguished": "😧",
-  "stunned": "😧",
   "smiling_imp": "😈",
   "open_mouth": "😮",
-  "surprise": "😮",
-  "impressed": "😮",
-  "wow": "😮",
   "neutral_face": "😐",
-  "confused": "❓",
+  "confused": "😕",
   "hushed": "😯",
-  "silence": "😶",
-  "speechless": "😯",
   "no_mouth": "😶",
   "innocent": "😇",
   "smirk": "😏",
@@ -99,35 +65,26 @@ module.exports={
   "joy_cat": "😹",
   "pouting_cat": "😾",
   "sparkles": "✨",
-  "shiny": "✨",
-  "star": "⭐",
-  "watch": "⌚",
   "fist": "✊",
   "hand": "✋",
   "raised_hand": "✋",
-  "highfive": "✋",
-  "rain": "☔",
   "cat": "🐱",
   "mouse": "🐭",
   "cow": "🐮",
   "monkey_face": "🐵",
+  "star": "⭐",
   "zap": "⚡",
-  "lightning": "⚡",
-  "thunder": "⚡",
   "umbrella": "☔",
-  "time": "⌚",
   "hourglass": "⌛",
+  "watch": "⌚",
   "black_joker": "🃏",
   "mahjong": "🀄",
   "coffee": "☕",
-  "cafe": "☕",
-  "espresso": "☕",
   "anchor": "⚓",
-  "loop": "➿",
   "wheelchair": "♿",
-  "accessibility": "♿",
   "negative_squared_cross_mark": "❎",
   "white_check_mark": "✅",
+  "loop": "➿",
   "aries": "♈",
   "taurus": "♉",
   "gemini": "♊",
@@ -143,7 +100,6 @@ module.exports={
   "x": "❌",
   "exclamation": "❗",
   "heavy_exclamation_mark": "❗",
-  "bang": "❗",
   "question": "❓",
   "grey_exclamation": "❕",
   "grey_question": "❔",
@@ -176,8 +132,8 @@ module.exports = {
   mad:              [ '>:(', '>:-(' ], // angry
   blush:            [ ':")', ':-")' ],
   broken_heart:     [ '</3', '<\\3' ],
-  // :/ & :\ disabled due conflicts, untill logic improved
-  confused:         [ /*':\\',*/ ':-\\', /*':/',*/ ':-/' ], // twemoji shows question
+  // :\ and :-\ not used because of conflict with markdown escaping
+  confused:         [ ':/', ':-/' ], // twemoji shows question
   cry:              [ ":'(", ":'-(", ':,(', ':,-(' ],
   frowning:         [ ':(', ':-(' ],
   heart:            [ '<3' ],
@@ -214,7 +170,7 @@ function quoteRE (str) {
 
 
 module.exports = function normalize_opts(options) {
-  var emojies = options.emojies,
+  var emojies = options.defs,
       shortcuts;
 
   // Filter emojies by whitelist, if needed
@@ -247,15 +203,15 @@ module.exports = function normalize_opts(options) {
   var names = Object.keys(emojies)
                 .map(function (name) { return ':' + name + ':'; })
                 .concat(Object.keys(shortcuts))
-                .map(function (name) { return quoteRE(name); })
                 .sort()
                 .reverse()
+                .map(function (name) { return quoteRE(name); })
                 .join('|');
   var scanRE = RegExp(names, 'g');
 
 
   return {
-    emojies: emojies,
+    defs: emojies,
     shortcuts: shortcuts,
     scanRE: scanRE
   };
@@ -279,12 +235,19 @@ module.exports = function emoji_html(tokens, idx /*, options, env */) {
 
 
 module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
-  var arrayReplaceAt = md.utils.arrayReplaceAt;
+  var arrayReplaceAt = md.utils.arrayReplaceAt,
+      ucm = md.utils.lib.ucmicro,
+      ZPCc = new RegExp([ ucm.Z.source, ucm.P.source, ucm.Cc.source ].join('|'));
 
   function splitTextToken(text, level, Token) {
     var token, last_pos = 0, nodes = [];
 
-    text.replace(compiledRE, function(match, offset) {
+    text.replace(compiledRE, function(match, offset, src) {
+      // Don't allow letters before :/ shortcut.
+      if (match === ':/' && offset > 0 && !ZPCc.test(src[offset - 1])) {
+        return;
+      }
+
       var emoji_name;
       // Validate emoji name
       if (shortcuts.hasOwnProperty(match)) {
@@ -346,7 +309,7 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
 'use strict';
 
 
-var emojies_light     = require('./lib/data/light.json');
+var emojies_defs      = require('./lib/data/light.json');
 var emojies_shortcuts = require('./lib/data/shortcuts');
 var emoji_html        = require('./lib/render');
 var emoji_replace     = require('./lib/replace');
@@ -354,17 +317,17 @@ var normalize_opts    = require('./lib/normalize_opts');
 
 
 module.exports = function emoji_plugin(md, options) {
-  var conf = options || {};
+  var defaults = {
+    defs: emojies_defs,
+    shortcuts: emojies_shortcuts,
+    enabled: []
+  };
 
-  var opts = normalize_opts({
-    emojies: conf.defs || emojies_light,
-    shortcuts: conf.shortcuts || emojies_shortcuts,
-    enabled: conf.enabled || []
-  });
+  var opts = normalize_opts(md.utils.assign({}, defaults, options || {}));
 
   md.renderer.rules.emoji = emoji_html;
 
-  md.core.ruler.push('emoji', emoji_replace(md, opts.emojies, opts.shortcuts, opts.scanRE));
+  md.core.ruler.push('emoji', emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE));
 };
 
 },{"./lib/data/light.json":1,"./lib/data/shortcuts":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[6])(6)
