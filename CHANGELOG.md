@@ -1,3 +1,10 @@
+1.2.0 / 2016-05-27
+------------------
+
+- Don't apply replacements in auto-generated links.
+- More strong restrictions for aliaces - don't allow letters before and after.
+
+
 1.1.1 / 2016-03-24
 ------------------
 
