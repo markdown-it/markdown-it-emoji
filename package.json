@@ -37,7 +37,7 @@
     "eslint-plugin-nodeca": "^1.0.0",
     "istanbul": "*",
     "lodash": "*",
-    "markdown-it": "^4.0.0",
+    "markdown-it": "^6.0.0",
     "markdown-it-testgen": "~0.1.0",
     "mocha": "*",
     "request": "*",

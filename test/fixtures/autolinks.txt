@@ -1,0 +1,31 @@
+---
+desc: Interaction with links
+---
+
+disallow shortcuts inside autolinks
+.
+<http://www.example.org/wiki/Special:Preferences> :P
+.
+<p><a href="http://www.example.org/wiki/Special:Preferences">http://www.example.org/wiki/Special:Preferences</a> 😛</p>
+.
+
+disallow emojis inside autolinks
+.
+<http://www.example.org/foo:joy:bar> :joy:
+.
+<p><a href="http://www.example.org/foo:joy:bar">http://www.example.org/foo:joy:bar</a> 😂</p>
+.
+
+disallow shortcuts inside linkified text
+.
+http://www.example.org/wiki/Special:Preferences :P
+.
+<p><a href="http://www.example.org/wiki/Special:Preferences">http://www.example.org/wiki/Special:Preferences</a> 😛</p>
+.
+
+disallow emojis inside linkified text
+.
+http://www.example.org/foo:joy:bar :joy:
+.
+<p><a href="http://www.example.org/foo:joy:bar">http://www.example.org/foo:joy:bar</a> 😂</p>
+.

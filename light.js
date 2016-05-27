@@ -19,5 +19,5 @@ module.exports = function emoji_plugin(md, options) {
 
   md.renderer.rules.emoji = emoji_html;
 
-  md.core.ruler.push('emoji', emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE));
+  md.core.ruler.push('emoji', emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE, opts.replaceRE));
 };

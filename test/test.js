@@ -36,6 +36,9 @@ describe('markdown-it-emoji', function () {
 
   md = markdownit().use(emoji, { enabled: [ 'smile', 'grin' ] });
   generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
+
+  md = markdownit({ linkify: true }).use(emoji);
+  generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
 });
 
 
@@ -62,4 +65,7 @@ describe('markdown-it-emoji-light', function () {
 
   md = markdownit().use(emoji_light, { enabled: [ 'smile', 'grin' ] });
   generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
+
+  md = markdownit({ linkify: true }).use(emoji);
+  generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
 });

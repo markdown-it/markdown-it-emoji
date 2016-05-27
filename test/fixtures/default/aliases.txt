@@ -36,3 +36,10 @@ c:\windows
 .
 <p>c:\windows</p>
 .
+
+should not appear inside words
+.
+User:Preferences :P
+.
+<p>User:Preferences 😛</p>
+.
