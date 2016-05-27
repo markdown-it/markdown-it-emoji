@@ -1,4 +1,4 @@
-/*! markdown-it-emoji 1.1.1 https://github.com//markdown-it/markdown-it-emoji @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitEmoji = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/*! markdown-it-emoji 1.2.0 https://github.com//markdown-it/markdown-it-emoji @license MIT */(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.markdownitEmoji = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
   "100": "💯",
   "1234": "🔢",
@@ -964,13 +964,14 @@ module.exports = function normalize_opts(options) {
                 .reverse()
                 .map(function (name) { return quoteRE(name); })
                 .join('|');
-  var scanRE = RegExp(names, 'g');
-
+  var scanRE = RegExp(names);
+  var replaceRE = RegExp(names, 'g');
 
   return {
     defs: emojies,
     shortcuts: shortcuts,
-    scanRE: scanRE
+    scanRE: scanRE,
+    replaceRE: replaceRE
   };
 };
 
@@ -991,7 +992,7 @@ module.exports = function emoji_html(tokens, idx /*, options, env */) {
 'use strict';
 
 
-module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
+module.exports = function create_rule(md, emojies, shortcuts, scanRE, replaceRE) {
   var arrayReplaceAt = md.utils.arrayReplaceAt,
       ucm = md.utils.lib.ucmicro,
       ZPCc = new RegExp([ ucm.Z.source, ucm.P.source, ucm.Cc.source ].join('|'));
@@ -999,17 +1000,22 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
   function splitTextToken(text, level, Token) {
     var token, last_pos = 0, nodes = [];
 
-    text.replace(compiledRE, function(match, offset, src) {
-      // Don't allow letters before :/ shortcut.
-      if (match === ':/' && offset > 0 && !ZPCc.test(src[offset - 1])) {
-        return;
-      }
-
+    text.replace(replaceRE, function(match, offset, src) {
       var emoji_name;
       // Validate emoji name
       if (shortcuts.hasOwnProperty(match)) {
         // replace shortcut with full name
         emoji_name = shortcuts[match];
+
+        // Don't allow letters before any shortcut (as in no ":/" in http://)
+        if (offset > 0 && !ZPCc.test(src[offset - 1])) {
+          return;
+        }
+
+        // Don't allow letters after any shortcut
+        if (offset + match.length < src.length && !ZPCc.test(src[offset + match.length])) {
+          return;
+        }
       } else {
         emoji_name = match.slice(1, -1);
       }
@@ -1040,7 +1046,8 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
 
   return function emoji_replace(state) {
     var i, j, l, tokens, token,
-        blockTokens = state.tokens;
+        blockTokens = state.tokens,
+        autolinkLevel = 0;
 
     for (j = 0, l = blockTokens.length; j < l; j++) {
       if (blockTokens[j].type !== 'inline') { continue; }
@@ -1051,7 +1058,11 @@ module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
       for (i = tokens.length - 1; i >= 0; i--) {
         token = tokens[i];
 
-        if (token.type === 'text' && compiledRE.test(token.content)) {
+        if (token.type === 'link_open' || token.type === 'link_close') {
+          if (token.info === 'auto') { autolinkLevel -= token.nesting; }
+        }
+
+        if (token.type === 'text' && scanRE.test(token.content) && autolinkLevel === 0) {
           // replace current node
           blockTokens[j].children = tokens = arrayReplaceAt(
             tokens, i, splitTextToken(token.content, token.level, state.Token)
@@ -1084,7 +1095,7 @@ module.exports = function emoji_plugin(md, options) {
 
   md.renderer.rules.emoji = emoji_html;
 
-  md.core.ruler.push('emoji', emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE));
+  md.core.ruler.push('emoji', emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE, opts.replaceRE));
 };
 
 },{"./lib/data/full.json":1,"./lib/data/shortcuts":2,"./lib/normalize_opts":3,"./lib/render":4,"./lib/replace":5}]},{},[6])(6)
