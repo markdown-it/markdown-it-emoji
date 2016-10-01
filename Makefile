@@ -11,7 +11,7 @@ GITHUB_PROJ := https://github.com//markdown-it/${NPM_PACKAGE}
 
 
 lint:
-	./node_modules/.bin/eslint --reset .
+	./node_modules/.bin/eslint .
 
 test: lint
 	./node_modules/.bin/mocha -R spec
