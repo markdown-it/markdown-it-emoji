@@ -35,7 +35,7 @@
     "coveralls": "^2.11.2",
     "eslint": "^3.7.0",
     "istanbul": "*",
-    "lodash": "*",
+    "lodash": "^4.16.2",
     "markdown-it": "^6.0.0",
     "markdown-it-testgen": "~0.1.0",
     "mocha": "*",

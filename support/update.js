@@ -38,7 +38,7 @@ request(emojiSrc, function (err, response, body) {
 
   var visible = fs.readFileSync(p.join(__dirname, 'visible.txt'), 'utf8');
 
-  var emoji_light = _.omit(emojies, function (val) {
+  var emoji_light = _.omitBy(emojies, function (val) {
     return visible.indexOf(val) < 0;
   });
   fs.writeFileSync(p.join(__dirname, '../lib/data/light.json'), JSON.stringify(emoji_light, null, 2), 'utf8');
