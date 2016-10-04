@@ -12,8 +12,11 @@ disallow shortcuts inside autolinks
 disallow emojis inside autolinks
 .
 <http://www.example.org/foo:joy:bar> :joy:
+
+[bar](http://www.example.org/foo:joy:)
 .
 <p><a href="http://www.example.org/foo:joy:bar">http://www.example.org/foo:joy:bar</a> 😂</p>
+<p><a href="http://www.example.org/foo:joy:">bar</a></p>
 .
 
 disallow shortcuts inside linkified text

@@ -33,3 +33,11 @@ Unknown name
 .
 <p>😂 :qwerty:</p>
 .
+
+
+Don't allow letters after shortcuts
+.
+:) :)123 :)abc
+.
+<p>😃 :)123 :)abc</p>
+.
