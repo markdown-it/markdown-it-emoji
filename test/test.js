@@ -1,7 +1,9 @@
 'use strict';
 
 
-var path = require('path');
+var path        = require('path');
+var fs          = require('fs');
+var assert      = require('assert');
 
 
 var markdownit  = require('markdown-it');
@@ -68,4 +70,33 @@ describe('markdown-it-emoji-light', function () {
 
   md = markdownit({ linkify: true }).use(emoji);
   generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
+});
+
+
+var emojies_shortcuts  = require('../lib/data/shortcuts');
+var emojies_defs       = require('../lib/data/full.json');
+var emojies_defs_light = require('../lib/data/light.json');
+
+describe('integrity', function () {
+
+  it('all shortcuts should exist', function () {
+    Object.keys(emojies_shortcuts).forEach(function (name) {
+      assert(emojies_defs[name], "shortcut doesn't exist: " + name);
+    });
+  });
+
+  it.skip('all light chars should exist', function () {
+    var visible = fs.readFileSync(path.join(__dirname, '../support/visible.txt'), 'utf8');
+
+    var available = Object.keys(emojies_defs_light).map(function (k) {
+      return emojies_defs_light[k];
+    });
+
+    visible.split('').forEach(function (ch) {
+      if (available.indexOf(ch) < 0) {
+        throw new Error('Character ' + ch + ' missed.');
+      }
+    });
+  });
+
 });
