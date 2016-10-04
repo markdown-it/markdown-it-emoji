@@ -85,18 +85,30 @@ describe('integrity', function () {
     });
   });
 
-  it.skip('all light chars should exist', function () {
+  it('no chars with "uXXXX" names allowed', function () {
+    Object.keys(emojies_defs).forEach(function (name) {
+      if (/^u[0-9a-b]{4,}$/i.test(name)) {
+        throw Error('Name ' + name + ' not allowed');
+      }
+    });
+  });
+
+  it('all light chars should exist', function () {
     var visible = fs.readFileSync(path.join(__dirname, '../support/visible.txt'), 'utf8');
 
     var available = Object.keys(emojies_defs_light).map(function (k) {
-      return emojies_defs_light[k];
+      return emojies_defs_light[k].replace(/\uFE0F/g, '');
     });
 
-    visible.split('').forEach(function (ch) {
-      if (available.indexOf(ch) < 0) {
-        throw new Error('Character ' + ch + ' missed.');
-      }
+    var missed = '';
+
+    Array.from(visible).forEach(function (ch) {
+      if (available.indexOf(ch) < 0) missed += ch;
     });
+
+    if (missed) {
+      throw new Error('Characters ' + missed + ' missed.');
+    }
   });
 
 });

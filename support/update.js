@@ -30,6 +30,9 @@ request(emojiSrc, function (err, response, body) {
     if (!def.emoji) { return; }
 
     def.aliases.forEach(function (alias) {
+      // Drop aliases without names (with names "uXXXX")
+      if (/^u[0-9a-b]{4,}$/i.test(alias)) return;
+
       emojies[alias] = def.emoji;
     });
   });
