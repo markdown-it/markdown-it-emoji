@@ -1,3 +1,11 @@
+1.3.0 / 2016-10-04
+------------------
+
+- Emoji lists update.
+- Don't miss emojis with variation chars after.
+- Filter emojis with fake names ("uXXXX").
+
+
 1.2.0 / 2016-05-27
 ------------------
 
