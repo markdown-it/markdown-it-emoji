@@ -70,6 +70,12 @@ describe('markdown-it-emoji-light', function () {
 
   md = markdownit({ linkify: true }).use(emoji);
   generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
+
+  md = markdownit().use(emoji);
+  md.renderer.rules.emoji = function (tokens, idx) {
+    return '<span>' + tokens[idx].content + '</span>';
+  };
+  generate(path.join(__dirname, 'fixtures/output.txt'), { header: true }, md);
 });
 
 
