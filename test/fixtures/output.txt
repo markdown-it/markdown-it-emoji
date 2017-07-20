@@ -9,3 +9,9 @@ wraps shorthand, shortcuts, and emojis
 .
 <p><span>😄</span> <span>😄</span> <span>😄</span></p>
 .
+works with multiple emoji
+.
+😄😄😄
+.
+<p><span>😄</span><span>😄</span><span>😄</span></p>
+.
