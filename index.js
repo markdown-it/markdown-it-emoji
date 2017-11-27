@@ -12,7 +12,8 @@ module.exports = function emoji_plugin(md, options) {
   var defaults = {
     defs: emojies_defs,
     shortcuts: emojies_shortcuts,
-    enabled: []
+    enabled: [],
+    disabled: []
   };
 
   var opts = normalize_opts(md.utils.assign({}, defaults, options || {}));
