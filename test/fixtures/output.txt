@@ -1,0 +1,17 @@
+---
+desc: Custom output function
+---
+
+
+wraps shorthand, shortcuts, and emojis
+.
+:D :smile: 😄
+.
+<p><span>😄</span> <span>😄</span> <span>😄</span></p>
+.
+works with multiple emoji
+.
+😄😄😄
+.
+<p><span>😄</span><span>😄</span><span>😄</span></p>
+.
