@@ -45,6 +45,8 @@ Options are not mandatory:
 - __enabled__ (Array) - disable all emojis except whitelisted
 - __shortcuts__ (Object) - rewrite default shortcuts
   - example: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
+- __renderer__ (String) - Can be unicode (default), twemoji or span
+  - example: `"renderer": "span", "span_class_prefix": "emoji emoji_"`
 
 _Differences in browser._ If you load the script directly into the page without
 using a package system, the module will add itself globally with the name `markdownitEmoji`.
@@ -52,36 +54,6 @@ Init code will look a bit different in this case:
 
 ```js
 var md = window.markdownit().use(window.markdownitEmoji);
-```
-
-
-### change output
-
-By default, emojis are rendered as appropriate unicode chars. But you can change
-the renderer function as you wish.
-
-Render as span blocks (for example, to use a custom iconic font):
-
-```js
-// ...
-// initialize
-
-md.renderer.rules.emoji = function(token, idx) {
-  return '<span class="emoji emoji_' + token[idx].markup + '"></span>';
-};
-```
-
-Or use [twemoji](https://github.com/twitter/twemoji):
-
-```js
-// ...
-// initialize
-
-var twemoji = require('twemoji')
-
-md.renderer.rules.emoji = function(token, idx) {
-  return twemoji.parse(token[idx].content);
-};
 ```
 
 __NB 1__. Read [twemoji docs](https://github.com/twitter/twemoji#string-parsing)!
