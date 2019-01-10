@@ -41,5 +41,8 @@
     "mocha": "*",
     "request": "*",
     "uglify-js": "*"
+  },
+  "optionalDependencies": {
+    "twemoji": "^11.2.0"
   }
 }
