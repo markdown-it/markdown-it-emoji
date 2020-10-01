@@ -42,6 +42,14 @@ browserify:
 	./node_modules/.bin/uglifyjs dist/markdown-it-emoji-light.js -b beautify=false,ascii-only=true -c -m \
 		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
 		> dist/markdown-it-emoji-light.min.js
+	# Browserify bare version
+	( printf "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" ; \
+		./node_modules/.bin/browserify ./bare.js -s markdownitEmoji \
+		) > dist/markdown-it-emoji-bare.js
+	# Minify bare version
+	./node_modules/.bin/uglifyjs dist/markdown-it-emoji-bare.js -b beautify=false,ascii-only=true -c -m \
+		--preamble "/*! ${NPM_PACKAGE} ${NPM_VERSION} ${GITHUB_PROJ} @license MIT */" \
+		> dist/markdown-it-emoji-bare.min.js
 
 .PHONY: lint test  coverage
 .SILENT: lint test

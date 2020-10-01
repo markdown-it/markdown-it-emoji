@@ -1,0 +1,10 @@
+---
+desc: Bare version
+---
+
+don't convert emojis without definitions
+.
+:smile:
+.
+<p>:smile:</p>
+.

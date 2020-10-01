@@ -8,10 +8,11 @@
 
 __v1.+ requires `markdown-it` v4.+, see changelog.__
 
-Two versions:
+Three versions:
 
 - __Full__ (default), with all github supported emojis.
 - [Light](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/light.json), with only well-supported unicode emojis and reduced size.
+- Bare, without included emojis or shortcuts. This requires defining your own definitions and shortcuts. 
 
 Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.js) like `:)`, `:-(`, and others. See the full list in the link above.
 
