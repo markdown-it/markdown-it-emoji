@@ -9,7 +9,8 @@ var assert      = require('assert');
 var markdownit  = require('markdown-it');
 var generate    = require('markdown-it-testgen');
 
-var emoji       = require('..');
+var emoji_bare  = require('../bare');
+var emoji_full  = require('..');
 var emoji_light = require('../light');
 
 
@@ -17,13 +18,13 @@ describe('markdown-it-emoji', function () {
   var md;
 
 
-  md = markdownit().use(emoji);
+  md = markdownit().use(emoji_full);
   generate(path.join(__dirname, 'fixtures/default'), { header: true }, md);
 
   generate(path.join(__dirname, 'fixtures/full.txt'), { header: true }, md);
 
 
-  md = markdownit().use(emoji, {
+  md = markdownit().use(emoji_full, {
     defs: {
       one: '!!!one!!!',
       fifty: '!!50!!'
@@ -36,10 +37,10 @@ describe('markdown-it-emoji', function () {
   generate(path.join(__dirname, 'fixtures/options.txt'), { header: true }, md);
 
 
-  md = markdownit().use(emoji, { enabled: [ 'smile', 'grin' ] });
+  md = markdownit().use(emoji_full, { enabled: [ 'smile', 'grin' ] });
   generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
 
-  md = markdownit({ linkify: true }).use(emoji);
+  md = markdownit({ linkify: true }).use(emoji_full);
   generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
 });
 
@@ -68,8 +69,27 @@ describe('markdown-it-emoji-light', function () {
   md = markdownit().use(emoji_light, { enabled: [ 'smile', 'grin' ] });
   generate(path.join(__dirname, 'fixtures/whitelist.txt'), { header: true }, md);
 
-  md = markdownit({ linkify: true }).use(emoji);
+  md = markdownit({ linkify: true }).use(emoji_full);
   generate(path.join(__dirname, 'fixtures/autolinks.txt'), { header: true }, md);
+});
+
+describe('markdown-it-emoji-bare', function () {
+  var md;
+
+  md = markdownit().use(emoji_bare);
+  generate(path.join(__dirname, 'fixtures/bare.txt'), { header: true }, md);
+
+  md = markdownit().use(emoji_bare, {
+    defs: {
+      one: '!!!one!!!',
+      fifty: '!!50!!'
+    },
+    shortcuts: {
+      fifty: [ ':50', '|50' ],
+      one: ':uno'
+    }
+  });
+  generate(path.join(__dirname, 'fixtures/options.txt'), { header: true }, md);
 });
 
 
