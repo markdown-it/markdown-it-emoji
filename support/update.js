@@ -2,49 +2,76 @@
 
 'use strict';
 
-/*eslint-disable no-console*/
+/* eslint-env es6 */
+/* eslint-disable no-console */
 
-var p        = require('path');
-var fs       = require('fs');
-var _        = require('lodash');
-var request  = require('request');
+const { join } = require('path');
+const fs       = require('fs');
+const https    = require('https');
 
-var emojiSrc = 'https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json';
+const emojiSrc = 'https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json';
 
-request(emojiSrc, function (err, response, body) {
-  if (err || response.statusCode !== 200) {
-    throw new Error('Failed to load emojies map');
-  }
 
-  var defs = JSON.parse(body);
+function download(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, function (res) {
+      if (res.statusCode !== 200) reject(`Bad response code: ${res.statusCode}`);
+
+      let data = [];
+
+      res
+        .on('data', chunk => data.push(chunk))
+        .on('end', () => resolve(Buffer.concat(data)))
+        .on('error', err => reject(err));
+    });
+  });
+}
+
+download(emojiSrc).then(data => {
+
+  let defs = JSON.parse(data.toString());
+
+  // Drop aliases without names (with names "uXXXX")
+  defs.forEach(def => {
+    def.aliases = def.aliases.filter(a => !/^u[0-9a-b]{4,}$/i.test(a));
+  });
 
   /*// Write chars in one string, to quickly select supported in editor
-  var text = defs.map(function (data) {
+  const text = defs.map(function (data) {
     return data.emoji || '';
   }).join('');
   require('fs').writeFileSync('visible.txt', text, 'utf8');*/
 
-  var emojies = {};
+  //
+  // Write full set
+  //
 
-  defs.forEach(function (def) {
-    if (!def.emoji) { return; }
+  let emojies = {};
 
-    def.aliases.forEach(function (alias) {
-      // Drop aliases without names (with names "uXXXX")
-      if (/^u[0-9a-b]{4,}$/i.test(alias)) return;
-
+  defs.forEach(def => {
+    def.aliases.forEach(alias => {
       emojies[alias] = def.emoji;
     });
   });
 
-  fs.writeFileSync(p.join(__dirname, '../lib/data/full.json'), JSON.stringify(emojies, null, 2), 'utf8');
+  fs.writeFileSync(join(__dirname, '../lib/data/full.json'), JSON.stringify(emojies, null, 2), 'utf8');
 
-  var visible = fs.readFileSync(p.join(__dirname, 'visible.txt'), 'utf8');
+  //
+  // Write light set
+  //
 
-  var emoji_light = _.omitBy(emojies, function (val) {
-    return visible.indexOf(val.replace(/\uFE0F/g, '')) < 0;
+  const visible = fs.readFileSync(join(__dirname, 'visible.txt'), 'utf8');
+
+  let emoji_light = {};
+
+  defs.forEach(def => {
+    def.aliases.forEach(alias => {
+      if (visible.includes(def.emoji.replace(/\uFE0F/g, ''))) {
+        emoji_light[alias] = def.emoji;
+      }
+    });
   });
-  fs.writeFileSync(p.join(__dirname, '../lib/data/light.json'), JSON.stringify(emoji_light, null, 2), 'utf8');
 
-  console.log(emojies);
-});
+  fs.writeFileSync(join(__dirname, '../lib/data/light.json'), JSON.stringify(emoji_light, null, 2), 'utf8');
+
+}).catch(err => console.error(err));
