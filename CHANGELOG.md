@@ -1,10 +1,11 @@
-1.5.0 / WIP
+2.0.0 / WIP
 ------------------
 
+- Update emojis db.
 - Added `bare.js` with zero config.
-- Dev deps bump.
 - istanbul => nyc
 - browserify => rollup.js
+- Dev deps bump & cleanup.
 - Configs cleanup
 
 
