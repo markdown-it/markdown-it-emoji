@@ -3,6 +3,9 @@
 
 - Added `bare.js` with zero config.
 - Dev deps bump.
+- istanbul => nyc
+- browserify => rollup.js
+- Configs cleanup
 
 
 1.4.0 / 2017-06-20
