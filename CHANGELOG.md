@@ -1,3 +1,10 @@
+1.5.0 / WIP
+------------------
+
+- Added `bare.js` with zero config.
+- Dev deps bump.
+
+
 1.4.0 / 2017-06-20
 ------------------
 
