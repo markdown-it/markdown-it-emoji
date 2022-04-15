@@ -1,3 +1,9 @@
+2.0.1 / WIP
+------------------
+
+- Emojis can now be escaped (e.g. `\:)`) with markdown-it@13 and above.
+
+
 2.0.0 / 2020-10-15
 ------------------
 
