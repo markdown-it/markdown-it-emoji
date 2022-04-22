@@ -1,4 +1,4 @@
-2.0.1 / WIP
+2.0.1 / 2022-04-22
 ------------------
 
 - Emojis can now be escaped (e.g. `\:)`) with markdown-it@13 and above.
