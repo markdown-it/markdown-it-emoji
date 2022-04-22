@@ -1,10 +1,10 @@
 
-/*! markdown-it-emoji 2.0.0 https://github.com/markdown-it/markdown-it-emoji @license MIT */
+/*! markdown-it-emoji 2.0.2 https://github.com/markdown-it/markdown-it-emoji @license MIT */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.markdownitEmoji = factory());
-}(this, (function () { 'use strict';
+})(this, (function () { 'use strict';
 
   var emojies_defs = {
   	"100": "💯",
@@ -2042,7 +2042,11 @@
 
     md.renderer.rules.emoji = render;
 
-    md.core.ruler.push('emoji', replace(md, opts.defs, opts.shortcuts, opts.scanRE, opts.replaceRE));
+    md.core.ruler.after(
+      'linkify',
+      'emoji',
+      replace(md, opts.defs, opts.shortcuts, opts.scanRE, opts.replaceRE)
+    );
   };
 
   var markdownItEmoji = function emoji_plugin(md, options) {
@@ -2059,4 +2063,4 @@
 
   return markdownItEmoji;
 
-})));
+}));
