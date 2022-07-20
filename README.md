@@ -97,6 +97,18 @@ style:
 }
 ```
 
+### In your markdown file
+
+```md
+Hello from mars :satellite:
+```
+
+becomes
+
+```
+Hello from mars 📡
+```
+
 ## License
 
 [MIT](https://github.com/markdown-it/markdown-it-emoji/blob/master/LICENSE)
