@@ -1,6 +1,6 @@
 # markdown-it-emoji
 
-[![Build Status](https://img.shields.io/travis/markdown-it/markdown-it-emoji/master.svg?style=flat)](https://travis-ci.org/markdown-it/markdown-it-emoji)
+[![CI](https://github.com/markdown-it/markdown-it-emoji/actions/workflows/ci.yml/badge.svg)](https://github.com/markdown-it/markdown-it-emoji/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/markdown-it-emoji.svg?style=flat)](https://www.npmjs.org/package/markdown-it-emoji)
 [![Coverage Status](https://coveralls.io/repos/markdown-it/markdown-it-emoji/badge.svg?branch=master&service=github)](https://coveralls.io/github/markdown-it/markdown-it-emoji?branch=master)
 
