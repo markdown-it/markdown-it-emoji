@@ -1,12 +1,25 @@
 env:
   node:     true
-  browser:  false
-  es6:      false
+  es6:      true
+
+overrides:
+  -
+    files: [ '*.mjs' ]
+    parserOptions:
+      ecmaVersion: latest
+      sourceType: module
+    rules:
+      no-restricted-globals: [ 2, require, __dirname ]
+  -
+    files: [ 'test/**' ]
+    env: { mocha: true }
+  -
+    files: [ 'lib/**', 'index.mjs' ]
+    parserOptions: { ecmaVersion: 2015 }
 
 ignorePatterns:
   - coverage/
   - dist/
-  - rollup.config.js
   - lib/data/full.js
   - lib/data/light.js
 

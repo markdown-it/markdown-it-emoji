@@ -1,14 +1,13 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import pkg from '../package.json';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
+import { readFileSync } from 'fs';
 
+const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url)));
 
 const plugins = [
   nodeResolve({ preferBuiltins: true }),
   commonjs(),
-  json({ namedExports: false }),
   {
     banner() {
       return `/*! ${pkg.name} ${pkg.version} https://github.com/${pkg.repository} @license ${pkg.license} */`;
@@ -19,7 +18,7 @@ const plugins = [
 const plugins_minify = [
   terser({
     format: {
-      ascii_only: true,
+      ascii_only: true
     }
   })
 ];

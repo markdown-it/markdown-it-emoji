@@ -15,10 +15,9 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "test": "npm run lint && nyc mocha",
-    "coverage": "npm run test && nyc report --reporter html",
-    "report-coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "browserify": "rollup -c support/rollup.config.js"
+    "build": "rollup -c support/rollup.config.mjs",
+    "test": "npm run lint && npm run build && c8 --exclude dist --exclude test -r text -r html -r lcov mocha",
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "files": [
     "index.js",
@@ -28,16 +27,16 @@
     "dist/"
   ],
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "coveralls": "^3.1.0",
-    "eslint": "^7.11.0",
-    "markdown-it": "^12.0.0",
-    "markdown-it-testgen": "~0.1.0",
-    "mocha": "8.1.3",
-    "nyc": "^15.1.0",
-    "rollup": "^2.29.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "c8": "^8.0.1",
+    "eslint": "^8.55.0",
+    "eslint-config-standard": "^17.1.0",
+    "markdown-it": "^13.0.2",
+    "markdown-it-testgen": "^0.1.6",
+    "mocha": "^10.2.0",
+    "rollup": "^4.6.1"
   }
 }
