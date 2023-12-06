@@ -1,3 +1,11 @@
+3.0.0 / 2023-12-07
+------------------
+
+- Breaking: changed exports. See README.
+- Rewrite to ESM.
+- Remove `dist/` from repo (build on package publish).
+
+
 2.0.2 / 2022-04-22
 ------------------
 

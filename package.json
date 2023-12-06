@@ -13,22 +13,31 @@
   ],
   "repository": "markdown-it/markdown-it-emoji",
   "license": "MIT",
-  "scripts": {
-    "lint": "eslint .",
-    "build": "rollup -c support/rollup.config.mjs",
-    "test": "npm run lint && npm run build && c8 --exclude dist --exclude test -r text -r html -r lcov mocha",
-    "prepublishOnly": "npm run lint && npm run build"
+  "main": "dist/index.cjs.js",
+  "module": "index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./index.mjs"
+    },
+    "./*": {
+      "require": "./*",
+      "import": "./*"
+    }
   },
   "files": [
-    "index.js",
-    "light.js",
-    "bare.js",
+    "index.mjs",
     "lib/",
     "dist/"
   ],
+  "scripts": {
+    "lint": "eslint .",
+    "build": "rollup -c",
+    "test": "npm run lint && npm run build && c8 --exclude dist --exclude test -r text -r html -r lcov mocha",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
   "devDependencies": {
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "c8": "^8.0.1",

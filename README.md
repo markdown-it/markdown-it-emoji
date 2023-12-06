@@ -4,26 +4,15 @@
 [![NPM version](https://img.shields.io/npm/v/markdown-it-emoji.svg?style=flat)](https://www.npmjs.org/package/markdown-it-emoji)
 [![Coverage Status](https://coveralls.io/repos/markdown-it/markdown-it-emoji/badge.svg?branch=master&service=github)](https://coveralls.io/github/markdown-it/markdown-it-emoji?branch=master)
 
-> Plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser, adding emoji & emoticon syntax support.
+> Plugin for [markdown-it](https://github.com/markdown-it/markdown-it) markdown parser, adding emoji & emoticon syntax support. Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.js) like `:)`, `:-(`, and others.
 
-__v1.+ requires `markdown-it` v4.+, see changelog.__
-
-Three versions:
-
-- __Full__ (default), with all github supported emojis.
-- [Light](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/light.js), with only well-supported unicode emojis and reduced size.
-- Bare, without included emojis or shortcuts. This requires defining your own definitions and shortcuts.
-
-Also supports emoticons [shortcuts](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.js) like `:)`, `:-(`, and others. See the full list in the link above.
+__NOTE. v3 changed exports, see below.__
 
 
 ## Install
 
-node.js, browser:
-
 ```bash
-npm install markdown-it-emoji --save
-bower install markdown-it-emoji --save
+npm install i markdown-it-emoji
 ```
 
 ## Use
@@ -31,12 +20,20 @@ bower install markdown-it-emoji --save
 ### init
 
 ```js
-var md = require('markdown-it')();
-var emoji = require('markdown-it-emoji');
-// Or for light version
-// var emoji = require('markdown-it-emoji/light');
+//
+// { full, light, bare } configs available.
+//
+//  full:  includes all available emojis support
+//  light: includes small subset of most useable emojis
+//  bare:  no defaults
+//
+// Also CJS & UMD builds available in `dist/` folder of published package,
+// if your env not supports ESM modules use.
+//
+import { full as emoji } from 'markdown-it-emoji'
+import markdownit from 'markdown-it'
 
-md.use(emoji [, options]);
+const md = markdownit().use(emoji/* , options */);
 ```
 
 Options are not mandatory:
@@ -49,12 +46,6 @@ Options are not mandatory:
 
 _Differences in browser._ If you load the script directly into the page without
 using a package system, the module will add itself globally with the name `markdownitEmoji`.
-Init code will look a bit different in this case:
-
-```js
-var md = window.markdownit().use(window.markdownitEmoji);
-```
-
 
 ### change output
 
@@ -78,7 +69,7 @@ Or use [twemoji](https://github.com/twitter/twemoji):
 // ...
 // initialize
 
-var twemoji = require('twemoji')
+import twemoji from 'twemoji'
 
 md.renderer.rules.emoji = function(token, idx) {
   return twemoji.parse(token[idx].content);
@@ -108,7 +99,3 @@ becomes
 ```
 Hello from mars 📡
 ```
-
-## License
-
-[MIT](https://github.com/markdown-it/markdown-it-emoji/blob/master/LICENSE)
