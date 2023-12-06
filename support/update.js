@@ -27,6 +27,12 @@ function download(url) {
   });
 }
 
+function obj2js(obj) {
+  return `// Generated, don't edit
+module.exports = ${JSON.stringify(obj, null, 2)}
+`;
+}
+
 download(emojiSrc).then(data => {
 
   let defs = JSON.parse(data.toString());
@@ -54,7 +60,10 @@ download(emojiSrc).then(data => {
     });
   });
 
-  fs.writeFileSync(join(__dirname, '../lib/data/full.json'), JSON.stringify(emojies, null, 2), 'utf8');
+
+
+
+  fs.writeFileSync(join(__dirname, '../lib/data/full.js'), obj2js(emojies), 'utf8');
 
   //
   // Write light set
@@ -72,6 +81,6 @@ download(emojiSrc).then(data => {
     });
   });
 
-  fs.writeFileSync(join(__dirname, '../lib/data/light.json'), JSON.stringify(emoji_light, null, 2), 'utf8');
+  fs.writeFileSync(join(__dirname, '../lib/data/light.js'), obj2js(emoji_light), 'utf8');
 
 }).catch(err => console.error(err));

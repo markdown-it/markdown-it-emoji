@@ -1,7 +1,7 @@
 'use strict';
 
 
-var emojies_defs      = require('./lib/data/full.json');
+var emojies_defs      = require('./lib/data/full');
 var emojies_shortcuts = require('./lib/data/shortcuts');
 var bare_emoji_plugin = require('./bare');
 

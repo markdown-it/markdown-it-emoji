@@ -94,8 +94,8 @@ describe('markdown-it-emoji-bare', function () {
 
 
 var emojies_shortcuts  = require('../lib/data/shortcuts');
-var emojies_defs       = require('../lib/data/full.json');
-var emojies_defs_light = require('../lib/data/light.json');
+var emojies_defs       = require('../lib/data/full');
+var emojies_defs_light = require('../lib/data/light');
 
 describe('integrity', function () {
 
