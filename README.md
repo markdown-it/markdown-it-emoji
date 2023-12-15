@@ -12,7 +12,7 @@ __NOTE. v3 changed exports, see below.__
 ## Install
 
 ```bash
-npm install i markdown-it-emoji
+npm install markdown-it-emoji
 ```
 
 ## Use
