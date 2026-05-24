@@ -40,9 +40,15 @@ Options are not mandatory:
 
 - __defs__ (Object) - rewrite available emoji definitions
   - example: `{ name1: char1, name2: char2, ... }`
+
+  By default, this **replaces** the entire definitions map.  
+  If you want to only override some of them and keep the rest, set `mergeDefs: true`.
 - __enabled__ (Array) - disable all emojis except whitelisted
 - __shortcuts__ (Object) - rewrite default shortcuts
   - example: `{ "smile": [ ":)", ":-)" ], "laughing": ":D" }`
+
+  By default, this **replaces** all shortcuts.  
+  If you want to extend/override instead, set `mergeShortcuts: true`.
 
 _Differences in browser._ If you load the script directly into the page without
 using a package system, the module will add itself globally with the name `markdownitEmoji`.
