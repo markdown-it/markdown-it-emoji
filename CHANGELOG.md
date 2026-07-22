@@ -1,3 +1,12 @@
+3.1.0 / 2026-07-22
+------------------
+
+- Replace `md.utils.assign` and `md.utils.has` with native equivalents (for
+  compatibility with markdown-it 15).
+- Fix npm package metadata.
+- Dev dependencies and CI cleanup.
+
+
 3.0.0 / 2023-12-07
 ------------------
 
