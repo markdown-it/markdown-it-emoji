@@ -1,4 +1,3 @@
-import nodeResolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import { readFileSync } from 'fs'
 
@@ -25,7 +24,6 @@ function umdConfig (input, suffix) {
       }
     ],
     plugins: [
-      nodeResolve(),
       {
         banner () {
           return `/*! ${pkg.name} ${pkg.version} https://github.com/${pkg.repository} @license ${pkg.license} */`
@@ -44,8 +42,7 @@ function cjsConfig (input, suffix) {
         file: `dist/${suffix}.cjs.js`,
         format: 'cjs'
       }
-    ],
-    plugins: [nodeResolve()]
+    ]
   }
 }
 
