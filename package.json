@@ -44,7 +44,7 @@
     "c8": "^8.0.1",
     "eslint": "^8.55.0",
     "eslint-config-standard": "^17.1.0",
-    "markdown-it": "^13.0.2",
+    "markdown-it": "^14.3.0",
     "markdown-it-testgen": "^0.1.6",
     "mocha": "^10.2.0",
     "rollup": "^4.6.1"
