@@ -11,7 +11,10 @@
     "emoticon",
     "emoticons"
   ],
-  "repository": "markdown-it/markdown-it-emoji",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markdown-it/markdown-it-emoji.git"
+  },
   "license": "MIT",
   "main": "dist/index.cjs.js",
   "module": "index.mjs",
