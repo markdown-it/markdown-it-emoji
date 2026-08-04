@@ -1,0 +1,27 @@
+---
+desc: Wrap emojis using renderer rules
+---
+
+
+Replace emojis
+.
+before :smile: test __1__
+.
+<p>before <span class="emoji emoji_smile">😄</span> test <strong>1</strong></p>
+.
+
+
+alias + original
+.
+:) :smiley:
+.
+<p><span class="emoji emoji_smiley">😃</span> <span class="emoji emoji_smiley">😃</span></p>
+.
+
+
+Unicode emojies are also wrapped
+.
+aaa 😂 bbb 😊 ccc 😘 ddd
+.
+<p>aaa <span class="emoji emoji_joy">😂</span> bbb <span class="emoji emoji_blush">😊</span> ccc <span class="emoji emoji_kissing_heart">😘</span> ddd</p>
+.

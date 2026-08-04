@@ -111,3 +111,13 @@ describe('integrity', function () {
     }
   })
 })
+
+describe('renderer rules', function () {
+  const md = markdownit().use(emoji_full)
+
+  md.renderer.rules.emoji = function (tokens, idx) {
+    return '<span class="emoji emoji_' + tokens[idx].markup + '">' + tokens[idx].content + '</span>'
+  }
+
+  generate(fileURLToPath(new URL('fixtures/renderer.txt', import.meta.url)), { header: true }, md)
+})
